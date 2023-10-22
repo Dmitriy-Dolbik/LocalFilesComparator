@@ -80,7 +80,7 @@ public class LocalFilesComparator {
     public Map<String, String> getUpdatedParentMap(Map<String, String> parentMap, Map<String, String> childMap) {
         Map<String, String> newParentFileAsMap = new HashMap<>(parentMap);
         addDifferentValuesFromChildMap(newParentFileAsMap, childMap);
-        addNewKeysAndValuesFromChildMap(childMap, parentMap);
+        addNewKeysAndValuesFromChildMap(childMap, newParentFileAsMap);
         return newParentFileAsMap;
     }
 
