@@ -1,15 +1,37 @@
 package org.example;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CreatorNewParentMap {
+    private List<String> keysWithCombinedValue = new ArrayList<>();
 
     public Map<String, String> getUpdatedParentMap(Map<String, String> parentMap, Map<String, String> childMap) {
-        Map<String, String> newParentFileAsMap = new HashMap<>(parentMap);
-        addDifferentValuesFromChildMap(newParentFileAsMap, childMap);
+        Map<String, String> newParentFileAsMap = new LinkedHashMap<>(parentMap);
         addNewKeysAndValuesFromChildMap(childMap, newParentFileAsMap);
+        addDifferentValuesFromChildMap(newParentFileAsMap, childMap);
+        return replaceCombainedValuesToTheStartOfMap(newParentFileAsMap);
+    }
+
+    private Map<String, String> replaceCombainedValuesToTheStartOfMap(Map<String, String> newParentFileAsMap) {
+        Map<String, String> sortedMap = new LinkedHashMap<>();
+        for (String keyWithCombinedValue : keysWithCombinedValue) {
+            String combinedValue = newParentFileAsMap.get(keyWithCombinedValue);
+            sortedMap.put(keyWithCombinedValue, combinedValue);
+        }
+        sortedMap.putAll(newParentFileAsMap);
+        newParentFileAsMap = sortedMap;
         return newParentFileAsMap;
+    }
+
+    private void replaceCombainedValuesToTheEndOfMap(Map<String, String> newParentFileAsMap) {
+        for (String keyWithCombinedValue : keysWithCombinedValue) {
+            String combinedValue = newParentFileAsMap.get(keyWithCombinedValue);
+            newParentFileAsMap.remove(keyWithCombinedValue);
+            newParentFileAsMap.put(keyWithCombinedValue, combinedValue);
+        }
     }
 
     private void addDifferentValuesFromChildMap(Map<String, String> newParentFileAsMap, Map<String, String> childMap) {
@@ -22,6 +44,7 @@ public class CreatorNewParentMap {
                 if (!childValue.equals(parentValue)) {
                     String combinedParentAndChildValue = getCombinedValue(parentValue, childValue);
                     updateValue(newParentFileAsMap, combinedParentAndChildValue, parentKey);
+                    keysWithCombinedValue.add(parentKey);
                 }
             }
         }
@@ -51,10 +74,9 @@ public class CreatorNewParentMap {
                 "parentValue = " +
                 parentValue +
                 "\n" +
-                "childValue = " +
+                "childValue  = " +
                 childValue +
                 "\n" +
                 "------------";
     }
-
 }
