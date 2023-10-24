@@ -16,13 +16,18 @@ public class CreatorNewParentMap {
         for (Map.Entry<String, String> entryParentMap : newParentFileAsMap.entrySet()) {
             String parentKey = entryParentMap.getKey();
             String parentValue = newParentFileAsMap.get(parentKey);
+            String parentValueInLowerCase = parentValue.toLowerCase();
 
             if (childMap.containsKey(parentKey)) {
-                String childValue = childMap.get(parentKey);
-                if (!childValue.equals(parentValue)) {
-                    String combinedParentAndChildValue = getCombinedValue(parentValue, childValue);
+                String childValueInLowerCase = childMap.get(parentKey).toLowerCase();
+                if (!childValueInLowerCase.equals(parentValueInLowerCase)) {
+                    String combinedParentAndChildValue = getCombinedValue(parentValueInLowerCase, childValueInLowerCase);
                     updateValue(newParentFileAsMap, combinedParentAndChildValue, parentKey);
+                } else {
+                    updateValue(newParentFileAsMap, parentValueInLowerCase, parentKey);
                 }
+            } else {
+                updateValue(newParentFileAsMap, parentValueInLowerCase, parentKey);
             }
         }
     }
@@ -33,7 +38,7 @@ public class CreatorNewParentMap {
             String childValue = entryChildMap.getValue();
 
             if (!parentMap.containsKey(childKey)) {
-                parentMap.put(childKey, childValue);
+                parentMap.put(childKey, childValue.toLowerCase());
             }
         }
     }
@@ -43,18 +48,18 @@ public class CreatorNewParentMap {
     }
 
     protected String getCombinedValue(String parentValue, String childValue) {
-        String combinedValue = "\n" +
+        return  "\n" +
                 "------------" +
+                "\n" +
                 "CHOOSE CORRECT VALUE" +
                 "\n" +
-                "parent value = " +
+                "parentValue = " +
                 parentValue +
                 "\n" +
                 "childValue = " +
                 childValue +
                 "\n" +
                 "------------";
-        return combinedValue;
     }
 
 }

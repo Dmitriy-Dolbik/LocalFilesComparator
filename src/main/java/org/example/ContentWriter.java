@@ -22,7 +22,6 @@ public class ContentWriter {
 
     public void createFile(Map<String, String> updatedParentMap) {
         String updatedParentFileAbsolutPath = getUpdatedParentFileAbsolutPath();
-
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(updatedParentFileAbsolutPath))) {
             for (Map.Entry<String, String> entryUpdatedParentMap : updatedParentMap.entrySet()) {
                 String contentLine = entryUpdatedParentMap.getKey() + EQUAL_SIGN + entryUpdatedParentMap.getValue();

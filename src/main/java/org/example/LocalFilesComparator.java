@@ -8,7 +8,7 @@ public class LocalFilesComparator {
     private ContentWriter contentWriter;
     private String parentFilePath;
     private String childFilePath;
-    
+
     private CreatorNewParentMap creatorNewParentMap = new CreatorNewParentMap();
 
     public LocalFilesComparator() {

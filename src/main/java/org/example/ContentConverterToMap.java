@@ -28,7 +28,8 @@ public class ContentConverterToMap {
     private static void fillMapWithCorrectData(String[] keyAndValue, Map<String, String> fileContentAsMap) {
         String key = keyAndValue[0].trim();
         String value = keyAndValue[1].trim();
-        fileContentAsMap.put(key, value);
+        String valueInLowerCase = value.toLowerCase();
+        fileContentAsMap.put(key, valueInLowerCase);
     }
 
     private static void fillMapWithIncorrectData(String[] keyAndValue, Map<String, String> fileContentAsMap) {

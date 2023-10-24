@@ -17,13 +17,12 @@ import static org.example.TestConstants.VALUE_3;
 
 public class ContentConverterToMapTests extends BasicTestsCase {
     private ContentConverterToMap contentConverterToMap;
-    private List<String> fileContent;
+    private List<String> fileContent = new ArrayList<>();
     private Map<String, String> expectedContentMap;
 
     @BeforeEach
     public void beforeEachTest() {
         contentConverterToMap = new ContentConverterToMap();
-        fillFileContent();
         fillExpectedFileMap();
     }
 
@@ -33,25 +32,24 @@ public class ContentConverterToMapTests extends BasicTestsCase {
         expectedContentMap.put(KEY_3, VALUE_3);
     }
 
-    private void fillFileContent() {
-        fileContent = new ArrayList<>();
-        fileContent.add(getContentLineWithoutSpaces());
-        fileContent.add(getContentLineWithSpaces());
-    }
-
-    private String getContentLineWithSpaces() {
-        return KEY_3 + SPASE_SIGN + EQUAL_SIGN + SPASE_SIGN + VALUE_3;
-    }
-
-    private String getContentLineWithoutSpaces() {
-        return KEY_1 + EQUAL_SIGN + VALUE_1;
-    }
-
-
     @Test
     public void convertFileContentToMapTest_shouldReturnCorrectMap() {
         //Given
+        fileContent.add(KEY_1 + EQUAL_SIGN + VALUE_1);
+        fileContent.add(KEY_3 + SPASE_SIGN + EQUAL_SIGN + SPASE_SIGN + VALUE_3);
 
+        //When
+        Map<String, String> realContentMap = ContentConverterToMap.convertFileContentToMap(fileContent);
+
+        //Then
+        assertEqualsMaps(expectedContentMap, realContentMap);
+    }
+
+    @Test
+    public void convertFileContentToMapTest_shouldReturnCorrectMap_2() {
+        //Given
+        fileContent.add(KEY_1 + EQUAL_SIGN + VALUE_1);
+        fileContent.add(KEY_3 + SPASE_SIGN + EQUAL_SIGN + SPASE_SIGN + VALUE_3.toUpperCase());
 
         //When
         Map<String, String> realContentMap = ContentConverterToMap.convertFileContentToMap(fileContent);
