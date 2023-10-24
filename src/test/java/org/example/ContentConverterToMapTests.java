@@ -8,13 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.example.Constants.EQUAL_SIGN;
-import static org.example.Constants.SPASE_SIGN;
-import static org.example.TestConstants.KEY_1;
-import static org.example.TestConstants.KEY_3;
-import static org.example.TestConstants.VALUE_1;
-import static org.example.TestConstants.VALUE_3;
-
 public class ContentConverterToMapTests extends BasicTestsCase {
     private ContentConverterToMap contentConverterToMap;
     private List<String> fileContent = new ArrayList<>();
@@ -28,15 +21,15 @@ public class ContentConverterToMapTests extends BasicTestsCase {
 
     private void fillExpectedFileMap() {
         expectedContentMap = new HashMap<>();
-        expectedContentMap.put(KEY_1, VALUE_1);
-        expectedContentMap.put(KEY_3, VALUE_3);
+        expectedContentMap.put("key1", "value1");
+        expectedContentMap.put("key3", "value3");
     }
 
     @Test
-    public void convertFileContentToMapTest_shouldReturnCorrectMap() {
+    public void convertFileContentToMapTest_valuesAreInLowerCases_shouldReturnCorrectMap() {
         //Given
-        fileContent.add(KEY_1 + EQUAL_SIGN + VALUE_1);
-        fileContent.add(KEY_3 + SPASE_SIGN + EQUAL_SIGN + SPASE_SIGN + VALUE_3);
+        fileContent.add("key1=value1");
+        fileContent.add("key3=value3");
 
         //When
         Map<String, String> realContentMap = ContentConverterToMap.convertFileContentToMap(fileContent);
@@ -46,10 +39,23 @@ public class ContentConverterToMapTests extends BasicTestsCase {
     }
 
     @Test
-    public void convertFileContentToMapTest_shouldReturnCorrectMap_2() {
+    public void convertFileContentToMapTest_thereAreSpaceSigns_shouldReturnCorrectMap() {
         //Given
-        fileContent.add(KEY_1 + EQUAL_SIGN + VALUE_1);
-        fileContent.add(KEY_3 + SPASE_SIGN + EQUAL_SIGN + SPASE_SIGN + VALUE_3.toUpperCase());
+        fileContent.add("key1=value1");
+        fileContent.add("key3 = value3");
+
+        //When
+        Map<String, String> realContentMap = ContentConverterToMap.convertFileContentToMap(fileContent);
+
+        //Then
+        assertEqualsMaps(expectedContentMap, realContentMap);
+    }
+
+    @Test
+    public void convertFileContentToMapTest_valuesInUpperCases_shouldReturnCorrectMap() {
+        //Given
+        fileContent.add("key1=VALUE1");
+        fileContent.add("key3=VALUE3");
 
         //When
         Map<String, String> realContentMap = ContentConverterToMap.convertFileContentToMap(fileContent);

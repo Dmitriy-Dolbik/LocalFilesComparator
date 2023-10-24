@@ -16,18 +16,13 @@ public class CreatorNewParentMap {
         for (Map.Entry<String, String> entryParentMap : newParentFileAsMap.entrySet()) {
             String parentKey = entryParentMap.getKey();
             String parentValue = newParentFileAsMap.get(parentKey);
-            String parentValueInLowerCase = parentValue.toLowerCase();
 
             if (childMap.containsKey(parentKey)) {
-                String childValueInLowerCase = childMap.get(parentKey).toLowerCase();
-                if (!childValueInLowerCase.equals(parentValueInLowerCase)) {
-                    String combinedParentAndChildValue = getCombinedValue(parentValueInLowerCase, childValueInLowerCase);
+                String childValue = childMap.get(parentKey);
+                if (!childValue.equals(parentValue)) {
+                    String combinedParentAndChildValue = getCombinedValue(parentValue, childValue);
                     updateValue(newParentFileAsMap, combinedParentAndChildValue, parentKey);
-                } else {
-                    updateValue(newParentFileAsMap, parentValueInLowerCase, parentKey);
                 }
-            } else {
-                updateValue(newParentFileAsMap, parentValueInLowerCase, parentKey);
             }
         }
     }
@@ -48,7 +43,7 @@ public class CreatorNewParentMap {
     }
 
     protected String getCombinedValue(String parentValue, String childValue) {
-        return  "\n" +
+        return "\n" +
                 "------------" +
                 "\n" +
                 "CHOOSE CORRECT VALUE" +
