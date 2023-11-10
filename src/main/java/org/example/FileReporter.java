@@ -1,4 +1,6 @@
-package org.example.utils;
+package org.example;
+
+import org.example.utils.ContentWriter;
 
 import java.io.File;
 import java.util.Collections;

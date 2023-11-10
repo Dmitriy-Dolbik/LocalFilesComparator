@@ -1,7 +1,5 @@
 package org.example;
 
-import org.example.utils.FileCopier;
-
 public class App {
     public static void main(String[] args) {
         String parentFilePath = "/home/ddolbik/IdeaProjects/comparingLocalFiles/src/main/resources/res-visualisation-customer_be_BY.properties";
