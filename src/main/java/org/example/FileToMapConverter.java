@@ -1,10 +1,12 @@
 package org.example;
 
+import org.example.utils.ContentLoader;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.example.Constants.EQUAL_SIGN;
+import static org.example.utils.Constants.EQUAL_SIGN;
 
 public class FileToMapConverter {
     private ContentLoader contentLoader = new ContentLoader();

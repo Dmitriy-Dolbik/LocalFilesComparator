@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CreatorNewParentMapTests extends BasicTestsCase {
+public class UpdatedParentMapCreatorTest extends BasicTestsCase {
 
-    CreatorNewParentMap creatorNewParentMap = new CreatorNewParentMap();
+    UpdatedParentMapCreator updatedParentMapCreator = new UpdatedParentMapCreator();
 
     @Test
     public void getUpdatedParentMapTest_shouldReturnCorrectMap() {
@@ -24,12 +24,12 @@ public class CreatorNewParentMapTests extends BasicTestsCase {
 
         Map<String, String> expectedMap = new HashMap<>();
         expectedMap.put("key1", "value1");
-        expectedMap.put("key2", creatorNewParentMap.getCombinedValue("value2_fromparent", "value2_fromchild"));
+        expectedMap.put("key2", "value2_fromparent");
         expectedMap.put("key3", "value3");
         expectedMap.put("key4", "value4");
 
         //When
-        Map<String, String> realMap = creatorNewParentMap.getUpdatedParentMap(parentMap, childMap);
+        Map<String, String> realMap = updatedParentMapCreator.createMap(parentMap, childMap);
 
         //Then
         assertEqualsMaps(expectedMap, realMap);

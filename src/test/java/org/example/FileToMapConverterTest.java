@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FileToMapConverterTests extends BasicTestsCase {
+public class FileToMapConverterTest extends BasicTestsCase {
     private FileToMapConverter fileToMapConverter = new FileToMapConverter();
     private List<String> fileContent = new ArrayList<>();
     private Map<String, String> expectedContentMap;

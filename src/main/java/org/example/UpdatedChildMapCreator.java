@@ -6,9 +6,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CreatorNewChildMap {
+public class UpdatedChildMapCreator {
     private List<String> keysWithNoValueInParentMap = new ArrayList<>();
-    private Map<String, String> newChildMap;
+    private Map<String, String> newChildMap = new HashMap<>();
 
     public Map<String, String> createMap(Map<String, String> updatedParentMap, Map<String, String> basicLocalChildMap) {
         Map<String, String> updatedChildMap = getUpdatedChildMap(updatedParentMap, basicLocalChildMap);
@@ -25,8 +25,6 @@ public class CreatorNewChildMap {
     }
 
     private Map<String, String> getUpdatedChildMap(Map<String, String> updatedParentMap, Map<String, String> basicLocalChildMap) {
-        newChildMap = new HashMap<>();
-
         for (Map.Entry<String, String> entryBasicLocalChildMap : basicLocalChildMap.entrySet()) {
             String basicLocalChildMapKey = entryBasicLocalChildMap.getKey();
 
