@@ -8,14 +8,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ContentConverterToMapTests extends BasicTestsCase {
-    private ContentConverterToMap contentConverterToMap;
+public class FileToMapConverterTests extends BasicTestsCase {
+    private FileToMapConverter fileToMapConverter = new FileToMapConverter();
     private List<String> fileContent = new ArrayList<>();
     private Map<String, String> expectedContentMap;
 
     @BeforeEach
     public void beforeEachTest() {
-        contentConverterToMap = new ContentConverterToMap();
         fillExpectedFileMap();
     }
 
@@ -32,7 +31,7 @@ public class ContentConverterToMapTests extends BasicTestsCase {
         fileContent.add("key3=value3");
 
         //When
-        Map<String, String> realContentMap = ContentConverterToMap.convertFileContentToMap(fileContent);
+        Map<String, String> realContentMap = fileToMapConverter.convertFileContentToMap(fileContent);
 
         //Then
         assertEqualsMaps(expectedContentMap, realContentMap);
@@ -45,7 +44,7 @@ public class ContentConverterToMapTests extends BasicTestsCase {
         fileContent.add("key3 = value3");
 
         //When
-        Map<String, String> realContentMap = ContentConverterToMap.convertFileContentToMap(fileContent);
+        Map<String, String> realContentMap = fileToMapConverter.convertFileContentToMap(fileContent);
 
         //Then
         assertEqualsMaps(expectedContentMap, realContentMap);
@@ -58,7 +57,7 @@ public class ContentConverterToMapTests extends BasicTestsCase {
         fileContent.add("key3=VALUE3");
 
         //When
-        Map<String, String> realContentMap = ContentConverterToMap.convertFileContentToMap(fileContent);
+        Map<String, String> realContentMap = fileToMapConverter.convertFileContentToMap(fileContent);
 
         //Then
         assertEqualsMaps(expectedContentMap, realContentMap);
