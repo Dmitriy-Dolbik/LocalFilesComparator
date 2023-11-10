@@ -5,7 +5,7 @@ import org.example.utils.ContentWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UpdatedParentMapCreator {
+public class ParentMapUpdater {
     private Map<String, String> newParentFileAsMap = new HashMap<>();
     private ContentWriter contentWriter = new ContentWriter();
 

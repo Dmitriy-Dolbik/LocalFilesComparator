@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UpdatedChildMapCreatorTest extends BasicTestsCase{
-    UpdatedChildMapCreator updatedChildMapCreator = new UpdatedChildMapCreator();
+public class ChildMapUpdaterTest extends BasicTestsCase{
+    ChildMapUpdater childMapUpdater = new ChildMapUpdater();
 
     @Test
     public void createMapTest_shouldReturnCorrectMap() {
@@ -24,10 +24,10 @@ public class UpdatedChildMapCreatorTest extends BasicTestsCase{
         Map<String, String> expectedMap = new HashMap<>();
         expectedMap.put("key1", "value1_updatedParentMap");
         expectedMap.put("key2", "value2_updatedParentMap");
-        expectedMap.put("key3", updatedChildMapCreator.getMissingValue());
+        expectedMap.put("key3", childMapUpdater.getMissingValue());
 
         //When
-        Map<String, String> realMap = updatedChildMapCreator.createMap(updatedParentMap, basicLocalChildMap);
+        Map<String, String> realMap = childMapUpdater.createMap(updatedParentMap, basicLocalChildMap);
 
         //Then
         assertEqualsMaps(expectedMap, realMap);

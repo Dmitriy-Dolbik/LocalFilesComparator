@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UpdatedParentMapCreatorTest extends BasicTestsCase {
+public class ParentMapUpdaterTest extends BasicTestsCase {
 
-    UpdatedParentMapCreator updatedParentMapCreator = new UpdatedParentMapCreator();
+    ParentMapUpdater parentMapUpdater = new ParentMapUpdater();
 
     @Test
     public void getUpdatedParentMapTest_shouldReturnCorrectMap() {
@@ -29,7 +29,7 @@ public class UpdatedParentMapCreatorTest extends BasicTestsCase {
         expectedMap.put("key4", "value4");
 
         //When
-        Map<String, String> realMap = updatedParentMapCreator.createMap(parentMap, childMap);
+        Map<String, String> realMap = parentMapUpdater.createMap(parentMap, childMap);
 
         //Then
         assertEqualsMaps(expectedMap, realMap);

@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UpdatedChildMapCreator {
+public class ChildMapUpdater {
     private List<String> keysWithNoValueInParentMap = new ArrayList<>();
     private Map<String, String> newChildMap = new HashMap<>();
 

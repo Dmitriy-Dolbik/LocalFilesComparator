@@ -15,10 +15,9 @@ public class NewFileCreator {
     private Map<String, String> originalChildMap = new HashMap<>();
     private FileReporter fileReporter = new FileReporter();
     private final AbsoluteFilePathCreator absoluteFilePathCreator = new AbsoluteFilePathCreator();
-    private final UpdatedChildMapCreator creatorUpdatedChildMap = new UpdatedChildMapCreator();
+    private final ChildMapUpdater creatorUpdatedChildMap = new ChildMapUpdater();
 
-
-    private UpdatedParentMapCreator updatedParentMapCreator = new UpdatedParentMapCreator();
+    private ParentMapUpdater parentMapUpdater = new ParentMapUpdater();
 
     public NewFileCreator() {
         //for testing
@@ -37,7 +36,7 @@ public class NewFileCreator {
     public void createNewParentFile() {
         Map<String, String> originalParentMap = fileToMapConverter.getFileContentAsMap(parentFilePath);
         originalChildMap = fileToMapConverter.getFileContentAsMap(childFilePath);
-        updatedParentMap = updatedParentMapCreator.createMap(originalParentMap, originalChildMap);
+        updatedParentMap = parentMapUpdater.createMap(originalParentMap, originalChildMap);
         contentWriter.writeFile(updatedParentMap, parentFilePath);
 
         fileReporter.reportAboutKeysWithDifferentValues(updatedParentMap, originalChildMap);
