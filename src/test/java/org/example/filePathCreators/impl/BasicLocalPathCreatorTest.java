@@ -1,11 +1,10 @@
-package org.example;
+package org.example.filePathCreators.impl;
 
-import org.example.utils.AbsoluteFilePathCreator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class AbsoluteFilePathCreatorTest {
-    AbsoluteFilePathCreator absoluteFilePathCreator = new AbsoluteFilePathCreator();
+public class BasicLocalPathCreatorTest {
+    BasicLocalPathCreator basicLocalFilePathCreator = new BasicLocalPathCreator();
 
     @Test
     public void getBasicLocalFileNameTest() {
@@ -14,7 +13,7 @@ public class AbsoluteFilePathCreatorTest {
         String expectedFileName = "res-visualisation-scokiosk.properties";
 
         //When
-        String realFileName = absoluteFilePathCreator.getBasicLocalFileName(filePath);
+        String realFileName = basicLocalFilePathCreator.getBasicLocalFileName(filePath);
 
         //When
         Assertions.assertEquals(expectedFileName, realFileName);
@@ -28,7 +27,7 @@ public class AbsoluteFilePathCreatorTest {
         String expectedFileName = "newVersion_res-visualisation-scokiosk.properties";
 
         //When
-        String realFileName = absoluteFilePathCreator.getBasicLocalFileName(filePath);
+        String realFileName = basicLocalFilePathCreator.getBasicLocalFileName(filePath);
 
         //When
         Assertions.assertEquals(expectedFileName, realFileName);
@@ -37,11 +36,11 @@ public class AbsoluteFilePathCreatorTest {
     @Test
     public void getBasicLocalFilePath() {
         //Given
-        String filePath = "/home/ddolbik/IdeaProjects/comparingLocalFiles/src/main/resources/newVersion_res-visualisation-scokiosk_be_BY.properties";
-        String expectedFileName = "/home/ddolbik/IdeaProjects/comparingLocalFiles/src/main/resources/newVersion_res-visualisation-scokiosk.properties";
+        String filePath =         "/home/ddolbik/IdeaProjects/comparingLocalFiles/src/main/resources/res-visualisation-scokiosk_be_BY.properties";
+        String expectedFileName = "/home/ddolbik/IdeaProjects/comparingLocalFiles/src/main/resources/res-visualisation-scokiosk.properties";
 
         //When
-        String realFileName = absoluteFilePathCreator.getBasicLocalFilePath(filePath);
+        String realFileName = basicLocalFilePathCreator.create(filePath);
 
         //When
         Assertions.assertEquals(expectedFileName, realFileName);

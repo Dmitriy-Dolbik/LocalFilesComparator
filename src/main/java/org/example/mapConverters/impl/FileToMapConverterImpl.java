@@ -1,6 +1,8 @@
-package org.example;
+package org.example.mapConverters.impl;
 
-import org.example.utils.ContentLoader;
+import org.example.contentLoader.ContentLoader;
+import org.example.contentLoader.impl.FileContentLoader;
+import org.example.mapConverters.FileToMapConverter;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,15 +10,15 @@ import java.util.Map;
 
 import static org.example.utils.Constants.EQUAL_SIGN;
 
-public class FileToMapConverter {
-    private ContentLoader contentLoader = new ContentLoader();
+public class FileToMapConverterImpl implements FileToMapConverter {
+    private final ContentLoader fileContentLoader = new FileContentLoader();
 
-    public Map<String, String> getFileContentAsMap(String filePath) {
-        List<String> fileContent = contentLoader.getFileContent(filePath);
+    public Map<String, String> convert(String filePath) {
+        List<String> fileContent = fileContentLoader.getFileContent(filePath);
         return convertFileContentToMap(fileContent);
     }
 
-    public Map<String, String> convertFileContentToMap(List<String> fileContent) {
+    Map<String, String> convertFileContentToMap(List<String> fileContent) {
         Map<String, String> fileContentAsMap = new HashMap<>();
 
         for (String contentLine : fileContent) {

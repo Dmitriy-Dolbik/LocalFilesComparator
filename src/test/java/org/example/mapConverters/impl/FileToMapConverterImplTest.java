@@ -1,5 +1,8 @@
-package org.example;
+package org.example.mapConverters.impl;
 
+import org.example.BasicTestsCase;
+import org.example.mapConverters.FileToMapConverter;
+import org.example.mapConverters.impl.FileToMapConverterImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,8 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FileToMapConverterTest extends BasicTestsCase {
-    private FileToMapConverter fileToMapConverter = new FileToMapConverter();
+public class FileToMapConverterImplTest extends BasicTestsCase {
+    private FileToMapConverterImpl fileToMapConverterImpl = new FileToMapConverterImpl();
     private List<String> fileContent = new ArrayList<>();
     private Map<String, String> expectedContentMap;
 
@@ -31,7 +34,7 @@ public class FileToMapConverterTest extends BasicTestsCase {
         fileContent.add("key3=value3");
 
         //When
-        Map<String, String> realContentMap = fileToMapConverter.convertFileContentToMap(fileContent);
+        Map<String, String> realContentMap = fileToMapConverterImpl.convertFileContentToMap(fileContent);
 
         //Then
         assertEqualsMaps(expectedContentMap, realContentMap);
@@ -44,7 +47,7 @@ public class FileToMapConverterTest extends BasicTestsCase {
         fileContent.add("key3 = value3");
 
         //When
-        Map<String, String> realContentMap = fileToMapConverter.convertFileContentToMap(fileContent);
+        Map<String, String> realContentMap = fileToMapConverterImpl.convertFileContentToMap(fileContent);
 
         //Then
         assertEqualsMaps(expectedContentMap, realContentMap);
@@ -57,7 +60,7 @@ public class FileToMapConverterTest extends BasicTestsCase {
         fileContent.add("key3=VALUE3");
 
         //When
-        Map<String, String> realContentMap = fileToMapConverter.convertFileContentToMap(fileContent);
+        Map<String, String> realContentMap = fileToMapConverterImpl.convertFileContentToMap(fileContent);
 
         //Then
         assertEqualsMaps(expectedContentMap, realContentMap);

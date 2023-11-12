@@ -1,5 +1,7 @@
-package org.example;
+package org.example.mapUpdaters.impl;
 
+import org.example.BasicTestsCase;
+import org.example.mapUpdaters.MapUpdater;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -7,7 +9,7 @@ import java.util.Map;
 
 public class ParentMapUpdaterTest extends BasicTestsCase {
 
-    ParentMapUpdater parentMapUpdater = new ParentMapUpdater();
+    MapUpdater parentMapUpdater = new ParentMapUpdater();
 
     @Test
     public void getUpdatedParentMapTest_shouldReturnCorrectMap() {
@@ -29,7 +31,7 @@ public class ParentMapUpdaterTest extends BasicTestsCase {
         expectedMap.put("key4", "value4");
 
         //When
-        Map<String, String> realMap = parentMapUpdater.createMap(parentMap, childMap);
+        Map<String, String> realMap = parentMapUpdater.update(parentMap, childMap);
 
         //Then
         assertEqualsMaps(expectedMap, realMap);

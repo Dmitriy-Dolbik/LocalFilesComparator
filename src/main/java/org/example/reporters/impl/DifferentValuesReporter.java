@@ -1,14 +1,16 @@
-package org.example;
+package org.example.reporters.impl;
 
-import org.example.utils.ContentWriter;
+import org.example.contentWriter.ContentWriter;
+import org.example.contentWriter.impl.FileContentWriter;
+import org.example.reporters.Reporter;
 
 import java.io.File;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FileReporter {
-    private final ContentWriter contentWriter = new ContentWriter();
+public class DifferentValuesReporter implements Reporter {
+    private final ContentWriter fileContentWriter = new FileContentWriter();
     private final String REPORT_FILE_NAME = "report file.txt";
     private final String reportFilePath = getReportFilePath();
 
@@ -17,10 +19,10 @@ public class FileReporter {
         return currentDirectory + File.separator + REPORT_FILE_NAME;
     }
 
-    public void reportAboutKeysWithDifferentValues(Map<String, String> updatedParentMap, Map<String, String> originalChildMap) {
+    public void report(Map<String, String> updatedParentMap, Map<String, String> originalChildMap) {
         Map<String, String> keysWithDifferentValues = getKeysWithDifferentValues(updatedParentMap, originalChildMap);
         String fileHeader = getReportFileHeader(keysWithDifferentValues);
-        contentWriter.writeFile(keysWithDifferentValues, reportFilePath, fileHeader);
+        fileContentWriter.writeFile(keysWithDifferentValues, reportFilePath, fileHeader);
     }
 
     private String getReportFileHeader(Map<String, String> keysWithDifferentValues) {

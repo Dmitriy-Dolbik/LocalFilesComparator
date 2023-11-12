@@ -1,4 +1,7 @@
-package org.example.utils;
+package org.example.contentWriter.impl;
+
+import org.example.contentWriter.ContentWriter;
+import org.example.exceptions.WritingFileException;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -7,13 +10,13 @@ import java.util.Map;
 
 import static org.example.utils.Constants.EQUAL_SIGN;
 
-public class ContentWriter {
+public class FileContentWriter implements ContentWriter {
 
     public void writeFile(Map<String, String> contentMapToWrite, String fileSourcePath) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileSourcePath))) {
             write(contentMapToWrite, bufferedWriter);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throwException(e);
         }
     }
 
@@ -22,7 +25,7 @@ public class ContentWriter {
             bufferedWriter.write(header);
             write(contentMapToWrite, bufferedWriter);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throwException(e);
         }
     }
 
@@ -32,5 +35,9 @@ public class ContentWriter {
             bufferedWriter.write(contentLine);
             bufferedWriter.newLine();
         }
+    }
+
+    private void throwException(IOException e) {
+        throw new WritingFileException(String.format("Error during writing file content, message: [%s]", e.getMessage()));
     }
 }

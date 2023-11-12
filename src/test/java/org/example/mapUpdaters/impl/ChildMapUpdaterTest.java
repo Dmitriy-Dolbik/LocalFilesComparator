@@ -1,11 +1,12 @@
-package org.example;
+package org.example.mapUpdaters.impl;
 
+import org.example.BasicTestsCase;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class ChildMapUpdaterTest extends BasicTestsCase{
+public class ChildMapUpdaterTest extends BasicTestsCase {
     ChildMapUpdater childMapUpdater = new ChildMapUpdater();
 
     @Test
@@ -27,7 +28,7 @@ public class ChildMapUpdaterTest extends BasicTestsCase{
         expectedMap.put("key3", childMapUpdater.getMissingValue());
 
         //When
-        Map<String, String> realMap = childMapUpdater.createMap(updatedParentMap, basicLocalChildMap);
+        Map<String, String> realMap = childMapUpdater.update(updatedParentMap, basicLocalChildMap);
 
         //Then
         assertEqualsMaps(expectedMap, realMap);
