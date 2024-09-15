@@ -12,6 +12,7 @@ import org.example.mapUpdaters.impl.ParentMapUpdater;
 import org.example.reporters.Reporter;
 import org.example.reporters.impl.DifferentValuesReporter;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class FileUpdater {
@@ -19,12 +20,10 @@ public class FileUpdater {
     private final FileToMapConverter fileToMapConverterImpl = new FileToMapConverterImpl();
     protected String parentFilePath;
     protected String childFilePath;
-    protected Map<String, String> updatedParentMap;
     private final Reporter differentValuesReporter = new DifferentValuesReporter();
     private final PathCreator basicLocalFilePathCreator = new BasicLocalPathCreator();
     private final MapUpdater creatorUpdatedChildMap = new ChildMapUpdater();
-
-    private MapUpdater parentMapUpdater = new ParentMapUpdater();
+    private final MapUpdater parentMapUpdater = new ParentMapUpdater();
 
     public FileUpdater() {
         //for testing
@@ -36,20 +35,21 @@ public class FileUpdater {
     }
 
     public void update() {
-        updateParentFile();
-        updateChildFile();
+        Map<String, String> updatedParentMap = updateParentFile();
+        updateChildFile(updatedParentMap);
     }
 
-    public void updateParentFile() {
+    public Map<String, String> updateParentFile() {
+        Map<String, String> updatedParentMap;
         Map<String, String> originalParentMap = fileToMapConverterImpl.convert(parentFilePath);
         Map<String, String> originalChildMap = fileToMapConverterImpl.convert(childFilePath);
         updatedParentMap = parentMapUpdater.update(originalParentMap, originalChildMap);
         fileContentWriter.writeFile(updatedParentMap, parentFilePath);
-
         differentValuesReporter.report(updatedParentMap, originalChildMap);
+        return updatedParentMap;
     }
 
-    public void updateChildFile() {
+    public void updateChildFile(Map<String, String> updatedParentMap) {
         String childBasicLocalFilePath = basicLocalFilePathCreator.create(childFilePath);
         Map<String, String> basicLocalChildMap = fileToMapConverterImpl.convert(childBasicLocalFilePath);
         Map<String, String> newChildMap = creatorUpdatedChildMap.update(updatedParentMap, basicLocalChildMap);
